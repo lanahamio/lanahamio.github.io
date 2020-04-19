@@ -1,66 +1,159 @@
-let speed = 10;
-let scale = 0.17; // Image scale (I work on 1080p monitor)
-let canvas;
-let ctx;
-let logoColor;
+(function() {
+    "use strict";
+    var s, r, h, f;
+    s = {
+        t: function(t, i) {
+            var n;
+            var o = t.toString();
+            var e;
+            for (e = 0; e < i; e += 1) {
+                n = [o.slice(0, 0), e.toString(), o.slice(0)].join("");
+                o = n
+            }
+            return n
+        },
+        i: function(t) {
+            var i, n;
+            for (i = 0; i < t.length; i += 1) {
+                n = new Image;
+                n.src = t[i]
+            }
+        },
+        o: function() {
+            return Math.floor(Math.random() * 10).toString() + Math.floor(Math.random() * 10).toString() + Math.floor(Math.random() * 10).toString() + Math.floor(Math.random() * 10).toString()
+        },
+        u: function(t) {
+            var i = t[Math.floor(Math.random() * t.length)];
+            return i
+        }
+    };
+    r = {
+        v: []
+    };
+    h = {
+        g: {},
+        init: function(t) {
+            this.g = t;
+            this.s(5);
+            f.init();
+            window.addEventListener("resize", function() {
+                window.location.reload()
+            })
+        },
+        s: function(t) {
+            var i;
+            for (i = 0; i < t; i += 1) {
+                r.v.push(h.g.h + h.g.l + s.t(i, 1) + h.g.p)
+            }
+            s.i(r.v)
+        },
+        m: function(t) {
+            var i = "";
+            var n;
+            var o = f.M.style.backgroundImage;
+            var e = o.replace(/^url\(["']?/, "").replace(/["']?\)$/, "");
+            var a = e.substring(e.lastIndexOf("/") + 1);
+            if (t === "random") {
+                i = s.u(r.v);
+                n = i.substring(i.lastIndexOf("/") + 1);
+                if (n === a) {
+                    i = s.u(r.v)
+                }
+            } else {
+                i = r.v[t + 1]
+            }
+            return i
+        }
+    };
+    f = {
+        init: function() {
+            var t = this;
+            t.I = document.createElement("div");
+            t.I.style.position = "relative";
+            t.I.style.backgroundColor = "#000";
+            t.I.id = h.g.L;
+            t.I.classList.add("bouncingdvdlogo");
+            document.body.appendChild(t.I);
+            t.M = document.createElement("div");
+            t.M.id = "dvdbouncinglogo-logo";
+            t.M.style.position = "absolute";
+            t.M.style.width = h.g.S + "px";
+            t.M.style.height = h.g.j + "px";
+            t.I.appendChild(t.M);
+            this.F();
+            t.H(t.M)
+        },
+        F: function() {
+            this.M.style.backgroundImage = "url(" + h.m("random") + ")"
+        },
+        H: function(t) {
+            var i = this;
+            var n = t.offsetWidth;
+            var o = t.offsetHeight;
+            var e = h.g.speed;
+            var a = window.innerWidth - n / 10;
+            var r = window.innerHeight - o / 10;
+            var f = Math.floor(Math.random() * (a - n));
+            var u = Math.floor(Math.random() * (r - o));
+            var d = s.u(["right", "left"]);
+            var v = s.u(["up", "down"]);
 
-let dvd = {
-    x: 200,
-    y: 300,
-    xspeed: 10,
-    yspeed: 10,
-    img: new Image()
-};
+            function g() {
+                if (d === "right") {
+                    if (f > a - n - e) {
+                        d = "left";
+                        i.F()
+                    }
+                } else if (d === "left") {
+                    if (f < e) {
+                        d = "right";
+                        i.F()
+                    }
+                }
+                if (v === "down") {
+                    if (u > r - o - e) {
+                        v = "up";
+                        i.F()
+                    }
+                } else if (v === "up") {
+                    if (u < e) {
+                        v = "down";
+                        i.F()
+                    }
+                }
+                if (d === "right") {
+                    f = f + e
+                } else if (d === "left") {
+                    f = f - e
+                }
+                if (v === "down") {
+                    u = u + e
+                } else if (v === "up") {
+                    u = u - e
+                }
+                t.style.left = f + "px";
+                t.style.top = u + "px"
+            }
+            setInterval(function() {
+                g()
+            }, 30)
+        }
+    };
 
-(function main(){
-    canvas = document.getElementById("tv-screen");
-    ctx = canvas.getContext("2d");
-    dvd.img.src = 'neenaa_DVD_logo.png';
-
-    //Draw the "tv screen"
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    pickColor();
-    update();
-})();
-
-function update() {
-    setTimeout(() => {
-        //Draw the canvas background
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        //Draw DVD Logo and his background
-        ctx.fillStyle = logoColor;
-        ctx.fillRect(dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
-        ctx.drawImage(dvd.img, dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
-        //Move the logo
-        dvd.x+=dvd.xspeed;
-        dvd.y+=dvd.yspeed;
-        //Check for collision 
-        checkHitBox();
-        update();   
-    }, speed)
-}
-
-//Check for border collision
-function checkHitBox(){
-    if(dvd.x+dvd.img.width*scale >= canvas.width || dvd.x <= 0){
-        dvd.xspeed *= -1;
-        pickColor();
+    function t(t) {
+        var i = {
+            S: t.S || 400,
+            j: t.j || 200,
+            speed: t.speed || 8,
+            l: t.l || "neenaa_DVD_logo",
+            p: t.p || ".png",
+            P: 50,
+            L: s.o()
+        };
+        h.init(i)
     }
-        
-    if(dvd.y+dvd.img.height*scale >= canvas.height || dvd.y <= 0){
-        dvd.yspeed *= -1;
-        pickColor();
-    }    
-}
-
-//Pick a random color in RGB format
-function pickColor(){
-    r = Math.random() * (254 - 0) + 0;
-    g = Math.random() * (254 - 0) + 0;
-    b = Math.random() * (254 - 0) + 0;
-
-    logoColor = 'rgb('+r+','+g+', '+b+')';
-}
+    t({
+        p: ".png",
+        speed: 5
+    })
+})();
