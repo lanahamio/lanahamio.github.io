@@ -1,75 +1,66 @@
-(function ($, window, undefined) {
-	$.fn.marqueeify = function (options) {
-		var settings = $.extend({
-			horizontal: true,
-			vertical: true,
-			speed: 100, // In pixels per second
-			container: $(this).parent(),
-			bumpEdge: function () {}
-		}, options);
-		
-		return this.each(function () {
-			var containerWidth, containerHeight, elWidth, elHeight, move, getSizes,
-				$el = $(this);
+let speed = 50;
+let scale = 0.17; // Image scale (I work on 1080p monitor)
+let canvas;
+let ctx;
+let logoColor;
 
-			getSizes = function () {
-				containerWidth = settings.container.outerWidth();
-				containerHeight = settings.container.outerHeight();
-				elWidth = $el.outerWidth();
-				elHeight = $el.outerHeight();
-			};
+let dvd = {
+    x: 200,
+    y: 300,
+    xspeed: 10,
+    yspeed: 10,
+    img: new Image()
+};
 
-			move = {
-				right: function () {
-					$el.animate({left: (containerWidth - elWidth)}, {duration: ((containerWidth/settings.speed) * 1000), queue: false, easing: "linear", complete: function () {
-						settings.bumpEdge();
-						move.left();
-					}});
-				},
-				left: function () {
-					$el.animate({left: 0}, {duration: ((containerWidth/settings.speed) * 1000), queue: false, easing: "linear", complete: function () {
-						settings.bumpEdge();
-						move.right();
-					}});
-				},
-				down: function () {
-					$el.animate({top: (containerHeight - elHeight)}, {duration: ((containerHeight/settings.speed) * 1000), queue: false, easing: "linear", complete: function () {
-						settings.bumpEdge();
-						move.up();
-					}});
-				},
-				up: function () {
-					$el.animate({top: 0}, {duration: ((containerHeight/settings.speed) * 1000), queue: false, easing: "linear", complete: function () {
-						settings.bumpEdge();
-						move.down();
-					}});
-				}
-			};
+(function main(){
+    canvas = document.getElementById("tv-screen");
+    ctx = canvas.getContext("2d");
+    dvd.img.src = 'neenaa_DVD_logo.png';
 
-			getSizes();
+    //Draw the "tv screen"
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-			if (settings.horizontal) {
-				move.right();
-			}
-			if (settings.vertical) {
-				move.down();
-			}
+    pickColor();
+    update();
+})();
 
-      // Make that shit responsive!
-      $(window).resize( function() {
-        getSizes();
-      });
-		});
-	};
-})(jQuery, window);
+function update() {
+    setTimeout(() => {
+        //Draw the canvas background
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        //Draw DVD Logo and his background
+        ctx.fillStyle = logoColor;
+        ctx.fillRect(dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
+        ctx.drawImage(dvd.img, dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
+        //Move the logo
+        dvd.x+=dvd.xspeed;
+        dvd.y+=dvd.yspeed;
+        //Check for collision 
+        checkHitBox();
+        update();   
+    }, speed)
+}
 
-$(document).ready( function() {
+//Check for border collision
+function checkHitBox(){
+    if(dvd.x+dvd.img.width*scale >= canvas.width || dvd.x <= 0){
+        dvd.xspeed *= -1;
+        pickColor();
+    }
+        
+    if(dvd.y+dvd.img.height*scale >= canvas.height || dvd.y <= 0){
+        dvd.yspeed *= -1;
+        pickColor();
+    }    
+}
 
-	$('.marquee').marqueeify({
-		speed: 300,
-		bumpEdge: function () {
-			var newColor = "hsl(" + Math.floor(Math.random()*360) + ", 100%, 50%)";
-			$('.marquee .logo').css('fill', newColor);
-		}
-	});
-});
+//Pick a random color in RGB format
+function pickColor(){
+    r = Math.random() * (254 - 0) + 0;
+    g = Math.random() * (254 - 0) + 0;
+    b = Math.random() * (254 - 0) + 0;
+
+    logoColor = 'rgb('+r+','+g+', '+b+')';
+}
