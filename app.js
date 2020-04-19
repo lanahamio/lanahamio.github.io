@@ -15,7 +15,7 @@ let dvd;
 let r, g, b;
 
 function preload() {
-  dvd = loadImage('dvd_logo.png');
+  dvd = loadImage('neenaa_DVD_logo.png');
 }
 
 function setup() {
