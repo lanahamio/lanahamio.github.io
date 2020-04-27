@@ -1,4 +1,4 @@
-let speed = 20;
+let speed = 10;
 let scale = 0.17; // Image scale (I work on 1080p monitor)
 let canvas;
 let ctx;
@@ -15,7 +15,7 @@ let dvd = {
 (function main(){
     canvas = document.getElementById("tv-screen");
     ctx = canvas.getContext("2d");
-    dvd.img.src = 'neenaa_dvd_logo.png';
+    dvd.img.src = 'neenaa_DVD_logo.png';
 
     //Draw the "tv screen"
     canvas.width  = window.innerWidth;
