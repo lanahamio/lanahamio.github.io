@@ -3,10 +3,45 @@
         <title>neenaa</title>
         <style>
             * {margin:0; padding: 0; color:red;}
+                    * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            overflow: hidden;
+        }
+
+        .link {
+            font-family: monospace;
+            font-size: 13px;
+            text-align: left;
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+        }
+
+        .link a {
+            text-decoration: none;
+            background-color: #000;
+            color: #666;
+            padding: 5px;
+        }
+
+        .link a:hover {
+            text-decoration: none;
+            color: #000;
+            background-color: #FFF;
+            padding: 5px;
         </style>
     </head>
 
     <body>
+            <aside class="link">
+        <a href="https://tayebbayri.com" target="_blank">neenaa on youtube</a>
+    </aside>
         <canvas id="tv-screen"></canvas>
         <script src="app.js"></script>
     </body>
