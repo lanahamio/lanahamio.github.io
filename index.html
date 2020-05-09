@@ -1,48 +1,83 @@
-<html>
-    <head>
-        <title>neenaa</title>
-        <style>
-            * {margin:0; padding: 0; color:red;}
-                    * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: #111;
-            overflow: hidden;
-        }
-
-        .link {
-            font-family: monospace;
-            font-size: 13px;
-            text-align: left;
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-        }
-
-        .link a {
-            text-decoration: none;
-            background-color: #000;
-            color: #666;
-            padding: 5px;
-        }
-
-        .link a:hover {
-            text-decoration: none;
-            color: #000;
-            background-color: #FFF;
-            padding: 5px;
-        </style>
-    </head>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>neenaa OS 3</title>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" type="text/css" />
+<link rel="stylesheet" href="style.css" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<script src="script.js"></script>
+  </head>
 
     <body>
-            <aside class="link">
-        <a href="https://www.youtube.com/channel/UCm-eHcWo1608iwPTjY8C7VQ?" target="_blank">neenaa on youtube</a>
-    </aside>
-        <canvas id="tv-screen"></canvas>
-        <script src="app.js"></script>
-    </body>
-</html>
+      <style>a {
+        text-decoration: none;
+        color:#000
+        } </style>
+ <div class="startbar">
+  <div id="startbutton" class="startbutton-off">
+    <b>Start</b>
+  </div>
+  <div class="time">
+  </div>
+</div>
+
+<div id="menu">
+  <div class="sidebar"></div>
+  <div class="headline"><b>Neenaa</b> 98
+  </div>
+  <ul class="menu-content">
+    <li class="item more" data-icon="https://res.cloudinary.com/penry/image/upload/v1474990247/directory_program_group_small_fqw8rr.ico">Programs
+      <ul class="dropdown-content">
+        <li class="dropdown-item" data-icon="https://res.cloudinary.com/penry/image/upload//w_65,h_65,c_lpad/v1474990266/msie2_ks3wek.png"><a href="https://www.google.com/chrome/" target="_blank">Internet Explorer</a></li>
+        
+        <li class="dropdown-item launch" data-launch="Notepad" data-title="Notepad" data-icon="https://res.cloudinary.com/penry/image/upload/v1474990270/notepad_file_kf9wqx.ico" data-url="https://98.js.org/programs/notepad/">Notepad</li>
+        
+        <li class="dropdown-item launch" data-launch="Minesweeper" data-title="Minesweeper" data-icon="https://win98icons.alexmeub.com/icons/png/minesweeper-0.png" data-url="https://98.js.org/programs/minesweeper/">Minesweeper</li>
+        
+        <li class="dropdown-item launch" data-launch="Paint" data-title="Paint" data-icon="https://win98icons.alexmeub.com/icons/png/paint_file-3.png" data-url="https://98.js.org/programs/jspaint/">Paint</li>
+        
+      </ul>
+    </li>
+    <li class="item more" data-icon="https://res.cloudinary.com/penry/image/upload/w_65,h_65,c_lpad/v1474990246/directory_pictures_ualddt.png">Photos
+      <ul class="dropdown-content">
+        <li class="dropdown-item launch" data-launch="outside" data-title="outside.jpg" data-icon="https://res.cloudinary.com/penry/image/upload/q_100/v1474990272/pictures_bt9tfg.ico" data-url="https://res.cloudinary.com/drkl1dlvt/video/upload/c_scale,w_365/v1589044659/UI4lQ4D_timstn.gif">outside.gif
+        </li>
+        
+        <li class="dropdown-item launch" data-launch="dank" data-title="outside_2.gif" data-icon="https://res.cloudinary.com/penry/image/upload/q_100/v1474990272/pictures_bt9tfg.ico" data-url="https://res.cloudinary.com/drkl1dlvt/video/upload/c_scale,w_287/v1589044668/hXlSDwq_powqg0.gif">outside_2.gif</li>
+
+        <li class="dropdown-item launch" data-launch="quack" data-title="quack.jpg" data-icon="https://res.cloudinary.com/penry/image/upload/q_100/v1474990272/pictures_bt9tfg.ico" data-url="https://res.cloudinary.com/drkl1dlvt/image/upload/c_scale,w_392/v1589044670/jlwFj0P_r62h4j.gif">quack.jpg</li>
+      </ul>
+    </li>
+    <li class="item more" data-icon="https://res.cloudinary.com/penry/image/upload//w_40,h_40,c_lpad/v1474990234/cd_audio_cd_mcloiq.png">Music
+    <ul class="dropdown-content">
+     <li class="dropdown-item launch" data-launch="420" data-title="∆πœ.mp3" data-icon="https://res.cloudinary.com/penry/image/upload/v1474990261/media_player_file_sqjlgm.png" data-url="https://cdpn.io/lana-hamio/debug/LYpmRqg">∆πœ.mp3</li>
+      <li class="dropdown-item launch" data-launch="420" data-title="‹|‹|«|«ü|¥¶[¶~±π.mp3" data-icon="https://res.cloudinary.com/penry/image/upload/v1474990261/media_player_file_sqjlgm.png" data-url="https://cdpn.io/lana-hamio/debug/QWjrdKV">‹|‹|«|«ü|¥¶[¶~±π.mp3</li>
+      </ul>
+    </li>
+    
+    <li class="item more" data-icon="https://res.cloudinary.com/penry/image/upload/c_lpad,g_center,r_0,w_65/v1474990261/media_player_file_sqjlgm.png">Videos
+      <ul class="dropdown-content">
+        <li class="dropdown-item launch" data-launch="nighttimecoomer" data-title="night time coomer.mp4" data-icon="https://res.cloudinary.com/penry/image/upload/v1474990261/media_player_file_sqjlgm.png" data-url="https://www.youtube.com/embed/b9dIf7zbiKg?controls=0">night time coomer.mp4</li>
+      
+      </ul>
+    </li>
+    <li class="item" data-icon="https://res.cloudinary.com/drkl1dlvt/image/upload/v1589035312/8-bit_ig_btuuxl.png"> <a href="https://www.instagram.com/neenaaband/" target="_blank">Instagram </a> </li>
+    
+    <li class="item" data-icon="https://win98icons.alexmeub.com/icons/png/soundpu2-2.png"> <a href="https://www.youtube.com/channel/UCm-eHcWo1608iwPTjY8C7VQ/videos?view_as=subscriber" target="_blank">Youtube</a></li>
+    
+    <li class="item" data-icon="https://res.cloudinary.com/penry/image/upload/q_100/v1474990279/search_file_2_yy4muv.ico">Find</li>
+    
+    
+    <li class="item launch" data-launch="Shutdown" data-title="Wait" data-icon="https://win98icons.alexmeub.com/icons/png/shut_down_normal-3.png" data-url="https://cdpn.io/lana-hamio/debug/QWjrGWd">Shutdown</li>
+    
+  </ul>
+</div>
+
+
+<div class="desktop">
+ </div>
+  </body>
+  </html>
